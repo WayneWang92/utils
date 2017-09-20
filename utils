@@ -1,0 +1,26 @@
+function range(start,end,step){
+    const ops=o=>Object.prototype.toString.call(o)==='[object Number]'
+    if(!ops(start)) return []
+    // only start
+    if(!ops(end)&&!ops(step)){
+        [start,end]=[0,start]
+        return [...Array(end).keys()].slice(start,)
+    }
+    // only start&&end
+    if(!ops(step)){
+        return [...Array(end).keys()].slice(start,)
+    }
+    // arguments all exist
+    if(ops(end)&&ops(step)){
+        let arr=[...Array(end).keys()].slice(start,)
+        let stepArr=[]
+        for(let a=0;a<arr.length;a+=step){
+            stepArr=[...stepArr,arr[a]]
+        }
+        return stepArr
+    }
+}
+console.log(range())        // []
+console.log(range(4))       // [0,1,2,3]
+console.log(range(3,6))     // [3,4,5]
+console.log(range(0,10,2))  // [0,2,4,6,8]
